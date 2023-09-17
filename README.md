@@ -21,7 +21,7 @@ https://github.com/CaiqueSobral/To-DoReactApp.git
 2. **Navigate to the project directory**.
 
 ```bash
-cd to-do-reactapp
+cd to-doreactapp
 ```
 
 3. **Install dependencies**.

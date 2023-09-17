@@ -4,7 +4,7 @@ type textInputProp = {
   goalInputHandler: (text: string) => void;
 };
 
-function GoalInput(props: textInputProp) {
+export default function GoalInput(props: textInputProp) {
   return (
     <TextInput
       className="border-[1.5px] w-[60%] mr-[5%] border-gray-400 rounded-lg pl-4 text-lg text-gray-50"
@@ -14,5 +14,3 @@ function GoalInput(props: textInputProp) {
     ></TextInput>
   );
 }
-
-export default GoalInput;

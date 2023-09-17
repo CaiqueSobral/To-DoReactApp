@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FlatList, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, View } from 'react-native';
 
 import GoalItem from '../components/GoalItem';
 import GoalInput from '../components/GoalInput';
@@ -7,13 +7,20 @@ import GoalInput from '../components/GoalInput';
 export default function HomePage() {
   type goalType = {
     text: string;
-    key: number;
+    id: string;
   };
 
   const [goals, setGoals] = useState<Array<goalType>>([]);
 
   function addGoalHandler(enteredGoalText: string) {
-    setGoals([...goals, { text: enteredGoalText, key: Math.random() }]);
+    setGoals([
+      ...goals,
+      { text: enteredGoalText, id: Math.random().toString() },
+    ]);
+  }
+
+  function removeGoal(key: string) {
+    setGoals(goals.filter((goal) => goal.id !== key));
   }
 
   return (
@@ -25,7 +32,13 @@ export default function HomePage() {
           className="flex pt-4 mb-4"
           data={goals}
           renderItem={(goalData) => {
-            return <GoalItem text={goalData.item.text} />;
+            return (
+              <GoalItem
+                text={goalData.item.text}
+                id={goalData.item.id}
+                onRemoveGoal={removeGoal}
+              />
+            );
           }}
         />
       </View>

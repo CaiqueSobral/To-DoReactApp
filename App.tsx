@@ -1,17 +1,21 @@
-import { Button, Text, Touchable, TouchableOpacity, View } from 'react-native';
-
-const hello = 'Salve World';
+import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default function App() {
   return (
-    <View className="flex-1 items-center justify-center bg-gray-600">
-      <View className="px-8 py-4 flex justify-center items-center bg-gray-400 rounded-md">
-        <Text className="text-gray-50">{hello}</Text>
+    <View className="flex-1 pt-[10%] items-center bg-gray-600">
+      <View className="flex flex-row justify-between mt-4 pb-8 mb-4 border-b-gray-500 border-b-[1.5px]">
+        <TextInput
+          className="border-[1.5px] w-[60%] mr-[5%] border-gray-400 rounded-xl pl-4 text-lg"
+          placeholder="Your course goal!"
+          placeholderTextColor={'#999'}
+        ></TextInput>
+        <TouchableOpacity className="py-1.5 px-6 bg-gray-400 rounded-2xl">
+          <Text className="text-gray-200 text-l">Add Goal</Text>
+        </TouchableOpacity>
       </View>
-      <Text className="text-gray-50 my-5">Aqui tem mais texto!</Text>
-      <TouchableOpacity className="px-8 py-4 flex justify-center items-center bg-gray-400 rounded-md">
-        <Text className="text-gray-50">Tap Me!</Text>
-      </TouchableOpacity>
+      <View className="flex items-center grow w-full">
+        <Text className="text-gray-200">List of Goals</Text>
+      </View>
     </View>
   );
 }

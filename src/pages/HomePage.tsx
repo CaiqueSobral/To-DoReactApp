@@ -1,5 +1,11 @@
 import { useState } from 'react';
-import { FlatList, View } from 'react-native';
+import {
+  FlatList,
+  Touchable,
+  TouchableOpacity,
+  View,
+  Text,
+} from 'react-native';
 
 import GoalItem from '../components/GoalItem';
 import GoalInput from '../components/GoalInput';
@@ -10,13 +16,21 @@ export default function HomePage() {
     id: string;
   };
 
+  const [isModalVisible, setModalVisible] = useState(false);
   const [goals, setGoals] = useState<Array<goalType>>([]);
 
+  function toggleModalAddGoal() {
+    setModalVisible(!isModalVisible);
+  }
+
   function addGoalHandler(enteredGoalText: string) {
-    setGoals([
-      ...goals,
-      { text: enteredGoalText, id: Math.random().toString() },
-    ]);
+    if (enteredGoalText) {
+      setGoals([
+        ...goals,
+        { text: enteredGoalText, id: Math.random().toString() },
+      ]);
+    }
+    toggleModalAddGoal();
   }
 
   function removeGoal(key: string) {
@@ -25,7 +39,15 @@ export default function HomePage() {
 
   return (
     <View className="flex-1 pt-[10%] items-center bg-neutral-600">
-      <GoalInput addGoal={addGoalHandler} />
+      <TouchableOpacity
+        className="mt-2 mb-6 bg-neutral-400 py-2 px-4 rounded-full shadow-xl"
+        onPress={toggleModalAddGoal}
+      >
+        <Text className="text-gray-50 text-lg">Add a new Goal</Text>
+      </TouchableOpacity>
+      {isModalVisible && (
+        <GoalInput addGoal={addGoalHandler} toggleModal={toggleModalAddGoal} />
+      )}
 
       <View className="self-stretch">
         <FlatList

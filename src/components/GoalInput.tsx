@@ -1,8 +1,16 @@
 import { useState } from 'react';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import {
+  Modal,
+  Pressable,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 type props = {
   addGoal: (text: string) => void;
+  toggleModal: () => void;
 };
 
 export default function GoalInput(props: props) {
@@ -18,20 +26,27 @@ export default function GoalInput(props: props) {
   }
 
   return (
-    <View className="flex flex-row justify-between mt-4 pb-8 mb-4 border-b-gray-500 border-b-[1.5px]">
-      <TextInput
-        className="border-[1.5px] w-[60%] mr-[5%] border-gray-400 rounded-lg pl-4 text-lg text-gray-50"
-        placeholder="New goal"
-        placeholderTextColor={'#999'}
-        onChangeText={goalInputTextHandler}
-        value={enteredGoalText}
-      ></TextInput>
-      <TouchableOpacity
-        className="py-1.5 px-6 bg-neutral-400 rounded-2xl"
-        onPress={AddGoalHandler}
+    <Modal animationType="fade" transparent={true}>
+      <Pressable
+        className="flex-1 justify-center bg-neutral-600 opacity-90"
+        onPress={props.toggleModal}
       >
-        <Text className="text-gray-200 text-l">Add Goal</Text>
-      </TouchableOpacity>
-    </View>
+        <View className="w-[90%] self-center py-8 flex-col justify-center items-center bg-neutral-700 opacity-95 rounded-2xl shadow-2xl">
+          <TextInput
+            className="border-[1.5px] w-[75%] border-gray-400 rounded-full p-2 text-xl mb-5 text-center text-gray-50"
+            placeholder="New goal"
+            placeholderTextColor={'#666'}
+            onChangeText={goalInputTextHandler}
+            value={enteredGoalText}
+          ></TextInput>
+          <TouchableOpacity
+            className="py-1.5 px-6 bg-neutral-400 rounded-full shadow-md"
+            onPress={AddGoalHandler}
+          >
+            <Text className="text-gray-200 text-lg">Add Goal</Text>
+          </TouchableOpacity>
+        </View>
+      </Pressable>
+    </Modal>
   );
 }

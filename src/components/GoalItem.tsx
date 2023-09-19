@@ -1,12 +1,12 @@
 import { View, Text, TouchableOpacity, Vibration } from 'react-native';
 
-type goalItemProps = {
+type GoalItemProps = {
   text: string;
   id: string;
   onRemoveGoal: (key: string) => void;
 };
 
-export default function GoalItem(props: goalItemProps) {
+export default function GoalItem(props: GoalItemProps) {
   function removeGoal() {
     props.onRemoveGoal(props?.id);
   }
